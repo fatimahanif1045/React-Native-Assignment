@@ -1,117 +1,147 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import PositionLayout from './components/PositionLayout';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import WelcomeScreen from './screens/WelcomeScreen';
+import SignInScreen from './screens/SignInScreen';
+import SignUpScreen from './screens/SignUpScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+//Assignment 1 Task 1
+/*
+const App = () => {
+  return <PositionLayout />; 
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+};
+*/
+
+//Assignment 1 Task 2
+/*
+interface FormData {
+  name: string;
+  email: string;
+  designation: string;
+  organizaion: string;
+
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const App = () => {
+  const [formData, setFormData] = useState<FormData>({ name: '', email: '' , designation: '', organizaion: ''});
+  const [submittedData, setSubmittedData] = useState<FormData | null>(null);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const handleInputChange = (field: keyof FormData, value: string) => {
+    setFormData({ ...formData, [field]: value });
+  };
+
+  const handleSubmit = () => {
+    setSubmittedData(formData);
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <View style={styles.container}>
+      <Text style={styles.heading}>Mobile App</Text>
+
+      <Text style={styles.buttonText}>Enter Name</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Your Name Here"
+        value={formData.name}
+        onChangeText={(text) => handleInputChange('name', text)}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+            
+      <Text style={styles.buttonText}>Enter Email</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Your Email ID Here"
+        value={formData.email}
+        onChangeText={(text) => handleInputChange('email', text)}
+      />
+
+      <Text style={styles.buttonText}>Enter Designation</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Your Designation Here"
+        value={formData.designation}
+        onChangeText={(text) => handleInputChange('designation', text)}
+      />
+
+      <Text style={styles.buttonText}>Enter Organizaion Name</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Your Organizaion Name Here"
+        value={formData.organizaion}
+        onChangeText={(text) => handleInputChange('organizaion', text)}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
+      {submittedData && (
+        <View style={styles.result}>
+          <Text style={styles.resultText}>{submittedData.name}</Text>
+          <Text style={styles.resultText}>{submittedData.email}</Text>
+          <Text style={styles.resultText}>{submittedData.designation}</Text>
+          <Text style={styles.resultText}>{submittedData.organizaion}</Text>
+
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      )}
+    </View>
   );
-}
+};
+*/
+
+//Assignment 2
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Welcome">
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
   },
-  sectionTitle: {
+  heading: {
     fontSize: 24,
-    fontWeight: '600',
+    marginBottom: 20,
+    textAlign: 'center',
   },
-  sectionDescription: {
-    marginTop: 8,
+  input: {
+    borderWidth: 1,
+    borderColor: '#000',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 15,
+  },
+  button: {
+    backgroundColor: 'powderblue',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'blue',
+    fontSize: 16,
+  },
+  result: {
+    marginTop: 20,
+  },
+  resultText: {
     fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
   },
 });
 
