@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#f5f5f5',
   },
+  button: {
+    marginVertical: 10,
+    width: '80%',
+  },
 });
 
 export default WelcomeScreen;

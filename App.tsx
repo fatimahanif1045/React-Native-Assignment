@@ -10,15 +10,15 @@ import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 
 //Assignment 1 Task 1
-/*
+
 const App = () => {
   return <PositionLayout />; 
 
 };
-*/
+
 
 //Assignment 1 Task 2
-/*
+
 interface FormData {
   name: string;
   email: string;
@@ -26,7 +26,7 @@ interface FormData {
   organizaion: string;
 
 }
-
+/*
 const App = () => {
   const [formData, setFormData] = useState<FormData>({ name: '', email: '' , designation: '', organizaion: ''});
   const [submittedData, setSubmittedData] = useState<FormData | null>(null);
@@ -94,7 +94,7 @@ const App = () => {
 //Assignment 2
 
 const Stack = createNativeStackNavigator();
-
+/*
 const App = () => {
   return (
     <NavigationContainer>
@@ -107,7 +107,7 @@ const App = () => {
   );
 };
 
-
+*/
 
 const styles = StyleSheet.create({
   container: {
